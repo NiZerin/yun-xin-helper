@@ -524,7 +524,7 @@ class ChatRoom extends Base
         $picHeight = intval($picHeight);
         $picSize = intval($picSize);
 
-        if (!$picWidth || $picHeight) {
+        if (!$picWidth || !$picHeight) {
             throw new YunXinArgExcetption('图片宽度和高度不能为0！');
         }
         if (!$picSize) {
