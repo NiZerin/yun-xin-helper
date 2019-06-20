@@ -1,5 +1,5 @@
 # 安装
-推荐使用composer：`composer require salamander/yun-xin-helper`
+推荐使用composer：`composer require nizerin/yun-xin-helper`
 
 # 使用
 ### 创建实例
