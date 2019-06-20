@@ -616,7 +616,7 @@ class ChatRoom extends Base
         if (!$audioSize) {
             throw new YunXinArgExcetption('语音文件尺寸不能为0！');
         }
-        if (!is_string($audioExt) || $audioExt != 'aac') {
+        if (!is_string($audioExt)) {
             throw new YunXinArgExcetption('语音文件后缀只能为acc！');
         }
 
