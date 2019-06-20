@@ -1,0 +1,21 @@
+{
+    "name": "nizerin/yun-xin-helper",
+    "description": "php sdk for NetEase YunXin",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nizerin",
+            "email": "nizerin98@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "YunXinHelper\\": "src"
+        }
+    }
+}
