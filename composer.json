@@ -1,6 +1,6 @@
 {
     "name": "nizerin/yun-xin-helper",
-    "description": "php sdk for NetEase YunXin",
+    "description": " 网易云信 IM SDK fro PHP , IM ,聊天室，直播间",
     "type": "library",
     "license": "MIT",
     "authors": [
