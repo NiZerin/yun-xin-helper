@@ -1,6 +1,6 @@
 <?php
 /**
- * User: salamander
+ * User: NiZerin
  * Date: 18-12-12
  * Time: 上午10:24
  */
@@ -8,7 +8,9 @@
 namespace YunXinHelper\Exception;
 
 
-class YunXinBusinessException extends \Exception
+use Exception;
+
+class YunXinBusinessException extends Exception
 {
 
 }

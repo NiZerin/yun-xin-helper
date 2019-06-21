@@ -1,4 +1,5 @@
 <?php
+
 namespace YunXinHelper;
 
 
@@ -11,7 +12,8 @@ use YunXinHelper\Api\User;
  * Class Entrance
  * @package YunXinHelper
  */
-class Entrance {
+class Entrance
+{
 
     /**
      * 网易云信分配的账号
@@ -36,7 +38,8 @@ class Entrance {
     /**
      * @return User
      */
-    public function user() {
+    public function user()
+    {
         $key = 'user';
         if (!array_key_exists($key, $this->instances)) {
             $user = new User($this->appKey, $this->appSecrt);
@@ -49,7 +52,8 @@ class Entrance {
     /**
      * @return Chat
      */
-    public function chat() {
+    public function chat()
+    {
         $key = 'chat';
         if (!array_key_exists($key, $this->instances)) {
             $chat = new Chat($this->appKey, $this->appSecrt);
@@ -62,8 +66,9 @@ class Entrance {
     /**
      * @return ChatRoom
      */
-    public function chat_room() {
-        $key = 'chat_room';
+    public function chatRoom()
+    {
+        $key = 'chatRoom';
         if (!array_key_exists($key, $this->instances)) {
             $chatRoom = new ChatRoom($this->appKey, $this->appSecrt);
             $this->instances[$key] = $chatRoom;
@@ -79,7 +84,8 @@ class Entrance {
      * @param $checksumPost
      * @return bool
      */
-    public function isLegalChecksum($body, $curTime, $checksumPost) {
+    public function isLegalChecksum($body, $curTime, $checksumPost)
+    {
         return sha1($this->appSecrt . md5($body) . $curTime) === $checksumPost;
     }
 }

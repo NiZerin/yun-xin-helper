@@ -1,6 +1,6 @@
 <?php
 /**
- * User: salamander
+ * User: NiZerin
  * Date: 18-12-17
  * Time: 上午11:16
  */
@@ -8,7 +8,11 @@
 namespace YunXinHelper\Api;
 
 
+use GuzzleHttp\Exception\GuzzleException;
 use YunXinHelper\Exception\YunXinArgExcetption;
+use YunXinHelper\Exception\YunXinBusinessException;
+use YunXinHelper\Exception\YunXinInnerException;
+use YunXinHelper\Exception\YunXinNetworkException;
 
 class ChatRoom extends Base
 {
@@ -59,9 +63,9 @@ class ChatRoom extends Base
      * @param int $queuelevel
      * @return array
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function create($creator, $name, $announcement = '', $broadcasturl = '', $ext = '', $queuelevel = 0)
     {
@@ -109,9 +113,9 @@ class ChatRoom extends Base
      * @param bool $needOnlineUserCount
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function get($roomId, $needOnlineUserCount = false)
     {
@@ -132,10 +136,10 @@ class ChatRoom extends Base
      * @param bool $needOnlineUserCount
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinInnerException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinInnerException
+     * @throws YunXinNetworkException
      */
     public function getBatch(array $roomIds, $needOnlineUserCount = false)
     {
@@ -162,10 +166,10 @@ class ChatRoom extends Base
      * @param null $queuelevel
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinInnerException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinInnerException
+     * @throws YunXinNetworkException
      */
     public function update(
         $roomId,
@@ -236,10 +240,10 @@ class ChatRoom extends Base
      * @param $valid
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinInnerException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinInnerException
+     * @throws YunXinNetworkException
      */
     public function toggleCloseStatus($roomId, $operator, $valid)
     {
@@ -269,9 +273,9 @@ class ChatRoom extends Base
      * @param string $notifyExt
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function setMemberRole($roomId, $operator, $target, $opt, $optValue, $notifyExt = '')
     {
@@ -585,9 +589,9 @@ class ChatRoom extends Base
      * @param $checkFriend
      * @return array
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function sendAudioMsg(
         $roomId,
@@ -657,10 +661,10 @@ class ChatRoom extends Base
      * @param string $notifyExt
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinInnerException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinInnerException
+     * @throws YunXinNetworkException
      */
     public function temporaryMute($roomId, $operator, $target, $muteDuration, $needNotify = true, $notifyExt = '')
     {
@@ -707,9 +711,9 @@ class ChatRoom extends Base
      * @param bool $transient
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function queueOffer($roomId, $key, $value, $operator, $transient = false)
     {
@@ -745,9 +749,9 @@ class ChatRoom extends Base
      * @param $key
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function queuePoll($roomId, $key)
     {
@@ -767,9 +771,9 @@ class ChatRoom extends Base
      * @param int $roomId
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function queueList($roomId)
     {
@@ -788,9 +792,9 @@ class ChatRoom extends Base
      * @param $roomId
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function queueDrop($roomId)
     {
@@ -809,9 +813,9 @@ class ChatRoom extends Base
      * @param $sizeLimit
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function queueInit($roomId, $sizeLimit)
     {
@@ -838,9 +842,9 @@ class ChatRoom extends Base
      * @param $notifyExt
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function muteRoom($roomId, $operator, $mute, $needNotify = true, $notifyExt = '')
     {
@@ -882,9 +886,9 @@ class ChatRoom extends Base
      * @param int $limit
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function getMembersByPage($roomId, $type, $endTime, $limit)
     {
@@ -924,9 +928,9 @@ class ChatRoom extends Base
      * @param array $accids
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function queryOnlineMembers($roomId, array $accids)
     {
@@ -957,9 +961,9 @@ class ChatRoom extends Base
      * @param string $ext
      * @return array
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
     public function updateMyRoomRole(
         $roomId,

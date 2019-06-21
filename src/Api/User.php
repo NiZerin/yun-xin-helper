@@ -1,6 +1,6 @@
 <?php
 /**
- * User: salamander
+ * User: NiZerin
  * Date: 18-12-12
  * Time: 上午11:12
  */
@@ -8,7 +8,11 @@
 namespace YunXinHelper\Api;
 
 
+use GuzzleHttp\Exception\GuzzleException;
+use LogicException;
 use YunXinHelper\Exception\YunXinArgExcetption;
+use YunXinHelper\Exception\YunXinBusinessException;
+use YunXinHelper\Exception\YunXinNetworkException;
 
 class User extends Base
 {
@@ -50,13 +54,24 @@ class User extends Base
      * @param $ex
      * @throws YunXinArgExcetption
      */
-    private function verifyUserInfo($accid, $name, array $props = [], $icon, $token, $sign,
-                                     $email, $birth, $mobile, $gender, $ex) {
+    private function verifyUserInfo(
+        $accid,
+        $name,
+        array $props = [],
+        $icon,
+        $token,
+        $sign,
+        $email,
+        $birth,
+        $mobile,
+        $gender,
+        $ex
+    ) {
         $gender = intval($gender);
         $propsStr = json_encode($props);
 
         if (!$accid || !is_string($accid)) {
-            throw new \LogicException('accid 不合法！');
+            throw new LogicException('accid 不合法！');
         }
         if (strlen($name) > self::USER_NAME_LIMIT) {
             throw new YunXinArgExcetption('用户昵称最大长度' . self::USER_NAME_LIMIT . '字符！');
@@ -106,12 +121,23 @@ class User extends Base
      * @param string $ex
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
-    public function create($accid, $name, array $props = [], $icon = '', $token = '', $sign = '', $email = '', $birth = '', 
-                            $mobile = '', $gender = 0, $ex = '') {
+    public function create(
+        $accid,
+        $name,
+        array $props = [],
+        $icon = '',
+        $token = '',
+        $sign = '',
+        $email = '',
+        $birth = '',
+        $mobile = '',
+        $gender = 0,
+        $ex = ''
+    ) {
         $this->verifyUserInfo($accid, $name, $props, $icon, $token, $sign,
             $email, $birth, $mobile, $gender, $ex);
 
@@ -138,11 +164,12 @@ class User extends Base
      * @param string $token
      * @return array
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
-    public function update($accid, array $props = [], $token = '') {
+    public function update($accid, array $props = [], $token = '')
+    {
         $this->verifyUserInfo($accid, '', $props, '', $token, '',
             '', '', '', 0, '');
 
@@ -159,11 +186,12 @@ class User extends Base
      * @param string $accid
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
-    public function refreshToken($accid) {
+    public function refreshToken($accid)
+    {
         $this->verifyUserInfo($accid, '', [], '', '', '',
             '', '', '', 0, '');
 
@@ -179,11 +207,12 @@ class User extends Base
      * @param bool $kick
      * @return array
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
-    public function block($accid, $kick = false) {
+    public function block($accid, $kick = false)
+    {
         $this->verifyUserInfo($accid, '', [], '', '', '',
             '', '', '', 0, '');
 
@@ -199,11 +228,12 @@ class User extends Base
      * @param $accid
      * @return array
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
-    public function unblock($accid) {
+    public function unblock($accid)
+    {
         $this->verifyUserInfo($accid, '', [], '', '', '',
             '', '', '', 0, '');
 
@@ -226,12 +256,21 @@ class User extends Base
      * @param $ex
      * @return array
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
-    public function updateUserInfo($accid, $name = '', $icon = '', $sign = '', $email = '',
-                                   $birth = '', $mobile = '', $gender = '', $ex = '') {
+    public function updateUserInfo(
+        $accid,
+        $name = '',
+        $icon = '',
+        $sign = '',
+        $email = '',
+        $birth = '',
+        $mobile = '',
+        $gender = '',
+        $ex = ''
+    ) {
         $this->verifyUserInfo($accid, $name, [], $icon, '', $sign,
             $email, $birth, $mobile, $gender, $ex);
 
@@ -254,11 +293,12 @@ class User extends Base
      * @param array $accids
      * @return mixed
      * @throws YunXinArgExcetption
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \YunXinHelper\Exception\YunXinBusinessException
-     * @throws \YunXinHelper\Exception\YunXinNetworkException
+     * @throws GuzzleException
+     * @throws YunXinBusinessException
+     * @throws YunXinNetworkException
      */
-    public function getUserInfos(array $accids) {
+    public function getUserInfos(array $accids)
+    {
         if (empty($accids)) {
             throw new YunXinArgExcetption('查询用户不能为空！');
         }

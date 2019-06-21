@@ -1,18 +1,19 @@
 <?php
+
 namespace YunXinHelper\Api;
 
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use YunXinHelper\Exception\YunXinBusinessException;
 use YunXinHelper\Exception\YunXinInnerException;
 use YunXinHelper\Exception\YunXinNetworkException;
 
 /**
- * User: salamander
+ * User: NiZerin
  * Date: 18-12-12
  * Time: 上午9:27
  */
-
 class Base
 {
     private $baseUrl = 'https://api.netease.im/nimserver/';
@@ -48,7 +49,6 @@ class Base
     const BUSINESS_PACK_ERROR_CODE = 999; // 打包错误
 
     const ACCID_LEGAL_LENGTH = 32;
-
 
 
     const CHAT_TYPE_TEXT = 0;
@@ -110,7 +110,7 @@ class Base
 
     /**
      * API checksum校验生成
-     * @param  void
+     * @param void
      * @return $CheckSum(对象私有属性)
      */
     public function checkSumBuilder()
@@ -133,7 +133,8 @@ class Base
      * 设置超时时间
      * @param $timeout
      */
-    public function setTimeout($timeout) {
+    public function setTimeout($timeout)
+    {
         $this->timeout = $timeout;
     }
 
@@ -145,16 +146,17 @@ class Base
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
-    protected function sendRequest($uri, array $data) {
+    protected function sendRequest($uri, array $data)
+    {
         $this->checkSumBuilder();
 
         $client = new Client([
             // Base URI is used with relative requests
             'base_uri' => $this->baseUrl,
             // You can set any number of default request options.
-            'timeout'  => $this->timeout,
+            'timeout' => $this->timeout,
         ]);
         $response = $client->request('POST', $uri, [
             'verify' => false, // 证书校验主动关闭
@@ -182,7 +184,8 @@ class Base
         }
     }
 
-    protected function bool2String($var) {
+    protected function bool2String($var)
+    {
         return $var ? 'true' : 'false';
     }
 }
