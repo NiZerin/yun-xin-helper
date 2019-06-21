@@ -1,3 +1,5 @@
+![https://yunxin.163.com/res/image/base/logo/logo-black@2x.png?v=5](https://yunxin.163.com/res/image/base/logo/logo-black@2x.png?v=5)
+
 # 安装
 推荐使用composer：`composer require nizerin/yun-xin-helper`
 
@@ -51,3 +53,6 @@ $entrance->chat()->sendTextBatchMsg($accidFrom, $accidsTo, $text);
 # 发送自定义系统通知
 $entrance->chat()->sendAttachMsg($from, CHAT::CHAT_ONT_TO_ONE, $to, $attach);
 ```
+
+### 更多功能请查看 SRC
+因为实在没时间写文档，后面我会逐渐完善，各位见谅
