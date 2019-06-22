@@ -461,9 +461,8 @@ class ChatRoom extends Base
         if (!$text) {
             throw new YunXinArgExcetption('文本消息内容不能为空！');
         }
-        $body = json_encode([
-            'msg' => $text
-        ]);
+
+        $body =  $text;
 
         return $this->sendMsg(
             $roomId,
