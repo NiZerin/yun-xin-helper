@@ -11,6 +11,7 @@ namespace YunXinHelper\Api;
 use GuzzleHttp\Exception\GuzzleException;
 use YunXinHelper\Exception\YunXinArgExcetption;
 use YunXinHelper\Exception\YunXinBusinessException;
+use YunXinHelper\Exception\YunXinInnerException;
 use YunXinHelper\Exception\YunXinNetworkException;
 
 class Chat extends Base
@@ -34,28 +35,28 @@ class Chat extends Base
 
     /**
      * 发送普通消息
-     * @param string $accidFrom
-     * @param string $accidTo
-     * @param int $open 0：点对点个人消息，1：群消息（高级群），其他返回414
-     * @param int $type
-     * @param string $body 最大长度5000字符，为一个JSON串
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param string $option
-     * @param string $pushcontent
-     * @param array $payload
-     * @param $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param bool $forcePushAll
-     * @param string $bid
-     * @param int $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  string  $accidFrom
+     * @param  string  $accidTo
+     * @param  int  $open  0：点对点个人消息，1：群消息（高级群），其他返回414
+     * @param  int  $type
+     * @param  string  $body  最大长度5000字符，为一个JSON串
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  array  $forcePushList
+     * @param  string  $forcePushContent
+     * @param  bool  $forcePushAll
+     * @param  string  $bid
+     * @param  int  $useYidun
+     * @param  int  $markRead
+     * @param  string  $checkFriend
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     private function sendMsg(
@@ -126,25 +127,25 @@ class Chat extends Base
      * 发送文本消息
      * @param $accidFrom
      * @param $to
-     * @param int $open 0：点对点个人消息，1：群消息（高级群），其他返回414
-     * @param string $text
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param string $option
-     * @param string $pushContent
-     * @param array $payload
-     * @param $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param $forcePushAll
-     * @param $bid
+     * @param  int  $open  0：点对点个人消息，1：群消息（高级群），其他返回414
+     * @param  string  $text
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  array  $forcePushList
+     * @param  string  $forcePushContent
+     * @param  bool  $forcePushAll
+     * @param  string  $bid
      * @param $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  int  $markRead
+     * @param  bool  $checkFriend
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendTextMsg(
@@ -195,33 +196,33 @@ class Chat extends Base
 
     /**
      * 发送图片消息
-     * @param string $accidFrom
-     * @param string $to
-     * @param int $open
-     * @param string $picName
-     * @param string $picMD5
-     * @param string $picUrl
-     * @param string $picExt etc:jpg
-     * @param int $picWidth
-     * @param int $picHeight
-     * @param int $picSize
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param $option
-     * @param $pushContent
-     * @param $payload
-     * @param $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param $forcePushAll
-     * @param $bid
+     * @param  string  $accidFrom
+     * @param  string  $to
+     * @param  int  $open
+     * @param  string  $picName
+     * @param  string  $picMD5
+     * @param  string  $picUrl
+     * @param  string  $picExt  etc:jpg
+     * @param  int  $picWidth
+     * @param  int  $picHeight
+     * @param  int  $picSize
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  array  $forcePushList
+     * @param  string  $forcePushContent
+     * @param  bool  $forcePushAll
+     * @param  string  $bid
      * @param $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  int  $markRead
+     * @param  bool  $checkFriend
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendPictureMsg(
@@ -295,31 +296,31 @@ class Chat extends Base
 
     /**
      * 发送语音消息
-     * @param string $accidFrom
-     * @param string $to
-     * @param int $open
-     * @param int $audioDur
-     * @param string $audioMD5
-     * @param string $audioUrl
-     * @param string $audioExt
-     * @param int $audioSize
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param string $option
-     * @param string $pushContent
-     * @param array $payload
-     * @param $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param $forcePushAll
-     * @param $bid
+     * @param  string  $accidFrom
+     * @param  string  $to
+     * @param  int  $open
+     * @param  int  $audioDur
+     * @param  string  $audioMD5
+     * @param  string  $audioUrl
+     * @param  string  $audioExt
+     * @param  int  $audioSize
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  array  $forcePushList
+     * @param  string  $forcePushContent
+     * @param  bool  $forcePushAll
+     * @param  string  $bid
      * @param $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  int  $markRead
+     * @param  bool  $checkFriend
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendAudioMsg(
@@ -394,30 +395,30 @@ class Chat extends Base
      * @param $accidFrom
      * @param $to
      * @param $open
-     * @param int $videoDur /视频持续时长ms
+     * @param  int  $videoDur  /视频持续时长ms
      * @param $videoMD5
      * @param $videoUrl
      * @param $videoExt
-     * @param int $videoWidth
-     * @param int $videoHeight
-     * @param int $videoSize
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param string $option
-     * @param string $pushContent
-     * @param array $payload
-     * @param string $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param $forcePushAll
-     * @param $bid
+     * @param  int  $videoWidth
+     * @param  int  $videoHeight
+     * @param  int  $videoSize
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  array  $forcePushList
+     * @param  string  $forcePushContent
+     * @param  bool  $forcePushAll
+     * @param  string  $bid
      * @param $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  int  $markRead
+     * @param  bool  $checkFriend
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendVideoMsg(
@@ -496,19 +497,19 @@ class Chat extends Base
 
     /**
      * 发送地理位置消息
-     * @param string $accidFrom
-     * @param string $to
+     * @param  string  $accidFrom
+     * @param  string  $to
      * @param $open
      * @param $title
      * @param $lng
      * @param $lat
      * @param $antispam
-     * @param array $antispamCustom
+     * @param  array  $antispamCustom
      * @param $option
      * @param $pushContent
      * @param $payload
      * @param $ext
-     * @param array $forcePushList
+     * @param  array  $forcePushList
      * @param $forcePushContent
      * @param $forcePushAll
      * @param $bid
@@ -520,6 +521,7 @@ class Chat extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendPositionMsg(
         $accidFrom,
@@ -575,8 +577,8 @@ class Chat extends Base
 
     /**
      * 发送文件消息
-     * @param string $accidFrom
-     * @param string $to
+     * @param  string  $accidFrom
+     * @param  string  $to
      * @param $open
      * @param $fileName
      * @param $fileMD5
@@ -584,12 +586,12 @@ class Chat extends Base
      * @param $fileExt
      * @param $fileSize
      * @param $antispam
-     * @param array $antispamCustom
+     * @param  array  $antispamCustom
      * @param $option
      * @param $pushContent
      * @param $payload
      * @param $ext
-     * @param array $forcePushList
+     * @param  array  $forcePushList
      * @param $forcePushContent
      * @param $forcePushAll
      * @param $bid
@@ -601,6 +603,7 @@ class Chat extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendFileMsg(
         $accidFrom,
@@ -664,17 +667,17 @@ class Chat extends Base
 
     /**
      * 发送自定义消息
-     * @param string $accidFrom
-     * @param string $accidTo
+     * @param  string  $accidFrom
+     * @param  string  $accidTo
      * @param $open
-     * @param array $arr
+     * @param  array  $arr
      * @param $antispam
-     * @param array $antispamCustom
+     * @param  array  $antispamCustom
      * @param $option
      * @param $pushContent
      * @param $payload
      * @param $ext
-     * @param array $forcePushList
+     * @param  array  $forcePushList
      * @param $forcePushContent
      * @param $forcePushAll
      * @param $bid
@@ -686,6 +689,7 @@ class Chat extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendCustomMsg(
         $accidFrom,
@@ -735,7 +739,7 @@ class Chat extends Base
     /**
      * 批量发送点对点普通消息
      * @param $accidFrom
-     * @param array $accidsTo
+     * @param  array  $accidsTo
      * @param $type
      * @param $body
      * @param $option
@@ -743,13 +747,14 @@ class Chat extends Base
      * @param $payload
      * @param $ext
      * @param $bid
-     * @param int $useYidun
+     * @param  int  $useYidun
      * @param $returnMsgid
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     private function sendBatchMsg(
         $accidFrom,
@@ -799,20 +804,21 @@ class Chat extends Base
     /**
      * 批量发送文本消息
      * @param $accidFrom
-     * @param array $accidsTo
+     * @param  array  $accidsTo
      * @param $text
      * @param $option
      * @param $pushContent
      * @param $payload
      * @param $ext
      * @param $bid
-     * @param int $useYidun
+     * @param  int  $useYidun
      * @param $returnMsgid
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendTextBatchMsg(
         $accidFrom,
@@ -849,8 +855,7 @@ class Chat extends Base
     /**
      * 发送批量图片消息
      * @param $accidFrom
-     * @param array $accidsTo
-     * @param $text
+     * @param  array  $accidsTo
      * @param $picName
      * @param $picMD5
      * @param $picUrl
@@ -858,17 +863,17 @@ class Chat extends Base
      * @param $picWidth
      * @param $picHeight
      * @param $picSize
-     * @param $option
-     * @param $pushContent
-     * @param $payload
-     * @param $ext
-     * @param $bid
-     * @param int $useYidun
-     * @param $returnMsgid
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  string  $bid
+     * @param  int  $useYidun
+     * @param  bool  $returnMsgid
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendPictureBatchMsg(
@@ -929,7 +934,7 @@ class Chat extends Base
     /**
      * 发送批量语音消息
      * @param $accidFrom
-     * @param array $accidsTo
+     * @param  array  $accidsTo
      * @param $audioDur
      * @param $audioMD5
      * @param $audioUrl
@@ -940,13 +945,14 @@ class Chat extends Base
      * @param $payload
      * @param $ext
      * @param $bid
-     * @param int $useYidun
+     * @param  int  $useYidun
      * @param $returnMsgid
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendAudioBatchMsg(
         $accidFrom,
@@ -1004,7 +1010,7 @@ class Chat extends Base
     /**
      * 发送批量视频消息
      * @param $accidFrom
-     * @param array $accidsTo
+     * @param  array  $accidsTo
      * @param $videoDur
      * @param $videoMD5
      * @param $videoUrl
@@ -1024,6 +1030,7 @@ class Chat extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendVideoBatchMsg(
         $accidFrom,
@@ -1088,7 +1095,7 @@ class Chat extends Base
     /**
      * 发送批量地理位置消息
      * @param $accidFrom
-     * @param array $accidsTo
+     * @param  array  $accidsTo
      * @param $title
      * @param $lng
      * @param $lat
@@ -1104,6 +1111,7 @@ class Chat extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendPositionBatchMsg(
         $accidFrom,
@@ -1145,30 +1153,23 @@ class Chat extends Base
     /**
      * 发送文件消息
      * @param $accidFrom
-     * @param $to
-     * @param $open
+     * @param  array  $accidsTo
      * @param $fileName
      * @param $fileMD5
      * @param $fileUrl
      * @param $fileExt
      * @param $fileSize
-     * @param $antispam
-     * @param $antispamCustom
-     * @param $option
-     * @param $pushContent
-     * @param $payload
-     * @param $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param $forcePushAll
-     * @param $bid
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  string  $bid
      * @param $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  bool  $returnMsgid
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendFileBatchMsg(
@@ -1220,26 +1221,19 @@ class Chat extends Base
     /**
      * 发送自定义消息
      * @param $accidFrom
-     * @param $accidTo
-     * @param $open
-     * @param array $arr
-     * @param $antispam
-     * @param $antispamCustom
-     * @param $option
-     * @param $pushContent
-     * @param $payload
-     * @param $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param $forcePushAll
-     * @param $bid
+     * @param  array  $accidsTo
+     * @param  array  $arr
+     * @param  string  $option
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $ext
+     * @param  string  $bid
      * @param $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  bool  $returnMsgid
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendCustomBatchMsg(
@@ -1276,8 +1270,7 @@ class Chat extends Base
      * 验证参数
      * @param $from
      * @param $msgType
-     * @param $to
-     * @param array $attach
+     * @param $attachStr
      * @param $pushContent
      * @param $payload
      * @param $save
@@ -1327,7 +1320,7 @@ class Chat extends Base
      * @param $from
      * @param $msgType
      * @param $to
-     * @param array $attach
+     * @param  array  $attach
      * @param $pushContent
      * @param $payload
      * @param $sound
@@ -1338,6 +1331,7 @@ class Chat extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function sendAttachMsg(
         $from,
@@ -1386,18 +1380,17 @@ class Chat extends Base
     /**
      * 批量发送自定义系统通知
      * @param $from
-     * @param $msgType
-     * @param array $toAccids
-     * @param array $attach
-     * @param string $pushContent
-     * @param array $payload
-     * @param $sound
-     * @param $save
-     * @param $option
+     * @param  array  $toAccids
+     * @param  array  $attach
+     * @param  string  $pushContent
+     * @param  array  $payload
+     * @param  string  $sound
+     * @param  int  $save
+     * @param  string  $option
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
      * @throws YunXinBusinessException
+     * @throws YunXinInnerException
      * @throws YunXinNetworkException
      */
     public function sendAttachBatchMsg(
@@ -1440,16 +1433,17 @@ class Chat extends Base
 
     /**
      * 文件上传
-     * @param string $content
-     * @param string $type
-     * @param bool $isHttps
-     * @param int $expireSec
-     * @param string $tag
+     * @param  string  $content
+     * @param  string  $type
+     * @param  bool  $isHttps
+     * @param  int  $expireSec
+     * @param  string  $tag
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function upload($content, $type, $isHttps = false, $expireSec = null, $tag = '')
     {
@@ -1476,20 +1470,21 @@ class Chat extends Base
 
     /**
      * 消息撤回
-     * @param string $deleteMsgid
-     * @param int $timetag
-     * @param int $type
+     * @param  string  $deleteMsgid
+     * @param  int  $timetag
+     * @param  int  $type
      * @param $from
      * @param $to
      * @param $msg
      * @param $ignoreTime
-     * @param string $pushContent
+     * @param  string  $pushContent
      * @param $payload
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function recallMsg(
         $deleteMsgid,
@@ -1536,14 +1531,15 @@ class Chat extends Base
      * 发送广播消息
      * @param $body
      * @param $from
-     * @param bool $isOffline
+     * @param  bool  $isOffline
      * @param $ttl
-     * @param array $targetOs
+     * @param  array  $targetOs
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function broadcastMsg($body, $from, $isOffline = false, $ttl, array $targetOs)
     {

@@ -110,8 +110,7 @@ class Base
 
     /**
      * API checksum校验生成
-     * @param void
-     * @return $CheckSum(对象私有属性)
+     * @return void $CheckSum(对象私有属性)
      */
     public function checkSumBuilder()
     {

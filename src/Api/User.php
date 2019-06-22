@@ -12,6 +12,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use LogicException;
 use YunXinHelper\Exception\YunXinArgExcetption;
 use YunXinHelper\Exception\YunXinBusinessException;
+use YunXinHelper\Exception\YunXinInnerException;
 use YunXinHelper\Exception\YunXinNetworkException;
 
 class User extends Base
@@ -110,20 +111,21 @@ class User extends Base
      * 创建网易云通信ID
      * @param $accid
      * @param $name
-     * @param array $props
-     * @param string $icon
-     * @param string $token
-     * @param string $sign
-     * @param string $email
-     * @param string $birth
-     * @param string $mobile
-     * @param int $gender 用户性别，0表示未知，1表示男，2女表示女
-     * @param string $ex
+     * @param  array  $props
+     * @param  string  $icon
+     * @param  string  $token
+     * @param  string  $sign
+     * @param  string  $email
+     * @param  string  $birth
+     * @param  string  $mobile
+     * @param  int  $gender  用户性别，0表示未知，1表示男，2女表示女
+     * @param  string  $ex
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function create(
         $accid,
@@ -159,14 +161,15 @@ class User extends Base
 
     /**
      * 网易云通信ID基本信息更新
-     * @param string $accid
-     * @param array $props
-     * @param string $token
+     * @param  string  $accid
+     * @param  array  $props
+     * @param  string  $token
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function update($accid, array $props = [], $token = '')
     {
@@ -183,12 +186,13 @@ class User extends Base
 
     /**
      * 更新并获取新token
-     * @param string $accid
+     * @param  string  $accid
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function refreshToken($accid)
     {
@@ -203,13 +207,14 @@ class User extends Base
 
     /**
      * 封禁网易云通信ID
-     * @param string $accid
-     * @param bool $kick
+     * @param  string  $accid
+     * @param  bool  $kick
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function block($accid, $kick = false)
     {
@@ -231,6 +236,7 @@ class User extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function unblock($accid)
     {
@@ -259,6 +265,7 @@ class User extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function updateUserInfo(
         $accid,
@@ -290,12 +297,13 @@ class User extends Base
 
     /**
      * 获取用户名片，可以批量
-     * @param array $accids
+     * @param  array  $accids
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function getUserInfos(array $accids)
     {

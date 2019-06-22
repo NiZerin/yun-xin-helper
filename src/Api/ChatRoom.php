@@ -57,15 +57,16 @@ class ChatRoom extends Base
      * 创建聊天室
      * @param $creator
      * @param $name
-     * @param string $announcement
-     * @param string $broadcasturl
-     * @param string $ext
-     * @param int $queuelevel
+     * @param  string  $announcement
+     * @param  string  $broadcasturl
+     * @param  string  $ext
+     * @param  int  $queuelevel
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function create($creator, $name, $announcement = '', $broadcasturl = '', $ext = '', $queuelevel = 0)
     {
@@ -110,12 +111,13 @@ class ChatRoom extends Base
     /**
      * 查询聊天室信息
      * @param $roomId
-     * @param bool $needOnlineUserCount
+     * @param  bool  $needOnlineUserCount
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function get($roomId, $needOnlineUserCount = false)
     {
@@ -270,12 +272,13 @@ class ChatRoom extends Base
      * @param $target
      * @param $opt
      * @param $optValue
-     * @param string $notifyExt
+     * @param  string  $notifyExt
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function setMemberRole($roomId, $operator, $target, $opt, $optValue, $notifyExt = '')
     {
@@ -430,16 +433,15 @@ class ChatRoom extends Base
      * @param $msgId
      * @param $fromAccid
      * @param $text
-     * @param null $resendFlag
-     * @param string $attach
-     * @param array $ext
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param int $skipHistory
-     * @param null $bid
-     * @param bool $highPriority
-     * @param null $useYidun
-     * @param bool $needHighPriorityMsgResend
+     * @param  null  $resendFlag
+     * @param  array  $ext
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  int  $skipHistory
+     * @param  null  $bid
+     * @param  bool  $highPriority
+     * @param  null  $useYidun
+     * @param  bool  $needHighPriorityMsgResend
      * @return mixed
      * @throws YunXinArgExcetption
      */
@@ -482,23 +484,84 @@ class ChatRoom extends Base
         );
     }
 
+    /**
+     * 发送提醒消息
+     * @param $roomId
+     * @param $msgId
+     * @param $fromAccid
+     * @param $text
+     * @param  null  $resendFlag
+     * @param  array  $ext
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  int  $skipHistory
+     * @param  null  $bid
+     * @param  bool  $highPriority
+     * @param  null  $useYidun
+     * @param  bool  $needHighPriorityMsgResend
+     * @return mixed
+     * @throws YunXinArgExcetption
+     */
+    public function sendTipsMsg(
+        $roomId,
+        $msgId,
+        $fromAccid,
+        $text,
+        $resendFlag = null,
+        array $ext = [],
+        $antispam = 'false',
+        array $antispamCustom = [],
+        $skipHistory = 0,
+        $bid = null,
+        $highPriority = false,
+        $useYidun = null,
+        $needHighPriorityMsgResend = true
+    ) {
+        if (!$text) {
+            throw new YunXinArgExcetption('提醒消息内容不能为空！');
+        }
+
+        $body = json_encode($text,256);
+
+        return $this->sendMsg(
+            $roomId,
+            $msgId,
+            $fromAccid,
+            self::CHAT_TYPE_TIPS,
+            $resendFlag,
+            $body,
+            $ext,
+            $antispam,
+            $antispamCustom,
+            $skipHistory,
+            $bid,
+            $highPriority,
+            $useYidun,
+            $needHighPriorityMsgResend
+        );
+    }
 
     /**
      * 发送图片消息
      * @param $roomId
      * @param $msgId
      * @param $fromAccid
-     * @param $text
-     * @param null $resendFlag
-     * @param string $attach
-     * @param array $ext
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param int $skipHistory
-     * @param null $bid
-     * @param bool $highPriority
-     * @param null $useYidun
-     * @param bool $needHighPriorityMsgResend
+     * @param $picName
+     * @param $picMD5
+     * @param $picUrl
+     * @param $picExt
+     * @param $picWidth
+     * @param $picHeight
+     * @param $picSize
+     * @param  null  $resendFlag
+     * @param  array  $ext
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  int  $skipHistory
+     * @param  null  $bid
+     * @param  bool  $highPriority
+     * @param  null  $useYidun
+     * @param  bool  $needHighPriorityMsgResend
      * @return mixed
      * @throws YunXinArgExcetption
      */
@@ -565,32 +628,25 @@ class ChatRoom extends Base
 
     /**
      * 发送语音消息
-     * @param string $accidFrom
-     * @param string $to
-     * @param int $open
-     * @param int $audioDur
-     * @param string $audioMD5
-     * @param string $audioUrl
-     * @param string $audioExt
-     * @param int $audioSize
-     * @param bool $antispam
-     * @param array $antispamCustom
-     * @param string $option
-     * @param string $pushContent
-     * @param array $payload
-     * @param $ext
-     * @param array $forcePushList
-     * @param $forcePushContent
-     * @param $forcePushAll
+     * @param $roomId
+     * @param $msgId
+     * @param $fromAccid
+     * @param  int  $audioDur
+     * @param  string  $audioMD5
+     * @param  string  $audioUrl
+     * @param  string  $audioExt
+     * @param  int  $audioSize
+     * @param  null  $resendFlag
+     * @param  array  $ext
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  int  $skipHistory
      * @param $bid
+     * @param  bool  $highPriority
      * @param $useYidun
-     * @param $markRead
-     * @param $checkFriend
+     * @param  bool  $needHighPriorityMsgResend
      * @return array
      * @throws YunXinArgExcetption
-     * @throws GuzzleException
-     * @throws YunXinBusinessException
-     * @throws YunXinNetworkException
      */
     public function sendAudioMsg(
         $roomId,
@@ -703,16 +759,17 @@ class ChatRoom extends Base
 
     /**
      * 往聊天室有序队列中新加或更新元素
-     * @param int $roomId
-     * @param string $key
-     * @param string $value
-     * @param string $operator
-     * @param bool $transient
+     * @param  int  $roomId
+     * @param  string  $key
+     * @param  string  $value
+     * @param  string  $operator
+     * @param  bool  $transient
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function queueOffer($roomId, $key, $value, $operator, $transient = false)
     {
@@ -744,13 +801,14 @@ class ChatRoom extends Base
 
     /**
      * 从队列中取出元素
-     * @param int $roomId
+     * @param  int  $roomId
      * @param $key
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function queuePoll($roomId, $key)
     {
@@ -767,12 +825,13 @@ class ChatRoom extends Base
 
     /**
      * 列出队列中所有元素
-     * @param int $roomId
+     * @param  int  $roomId
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function queueList($roomId)
     {
@@ -794,6 +853,7 @@ class ChatRoom extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function queueDrop($roomId)
     {
@@ -815,6 +875,7 @@ class ChatRoom extends Base
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function queueInit($roomId, $sizeLimit)
     {
@@ -834,16 +895,17 @@ class ChatRoom extends Base
 
     /**
      * 设置聊天室整体禁言状态（仅创建者和管理员能发言）
-     * @param int $roomId
-     * @param string $operator
-     * @param bool $mute
-     * @param bool $needNotify
+     * @param  int  $roomId
+     * @param  string  $operator
+     * @param  bool  $mute
+     * @param  bool  $needNotify
      * @param $notifyExt
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function muteRoom($roomId, $operator, $mute, $needNotify = true, $notifyExt = '')
     {
@@ -879,15 +941,16 @@ class ChatRoom extends Base
 
     /**
      * 分页获取成员列表
-     * @param int $roomId
-     * @param int $type
-     * @param int $endTime
-     * @param int $limit
+     * @param  int  $roomId
+     * @param  int  $type
+     * @param  int  $endTime
+     * @param  int  $limit
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function getMembersByPage($roomId, $type, $endTime, $limit)
     {
@@ -923,13 +986,14 @@ class ChatRoom extends Base
 
     /**
      * 批量获取在线成员信息
-     * @param int $roomId
-     * @param array $accids
+     * @param  int  $roomId
+     * @param  array  $accids
      * @return mixed
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function queryOnlineMembers($roomId, array $accids)
     {
@@ -950,19 +1014,20 @@ class ChatRoom extends Base
 
     /**
      * 变更聊天室内的角色信息
-     * @param int $roomId
-     * @param string $accid
-     * @param bool $save
-     * @param bool $needNotify
-     * @param string $notifyExt
-     * @param string $nick
-     * @param string $avator
-     * @param string $ext
+     * @param  int  $roomId
+     * @param  string  $accid
+     * @param  bool  $save
+     * @param  bool  $needNotify
+     * @param  string  $notifyExt
+     * @param  string  $nick
+     * @param  string  $avator
+     * @param  string  $ext
      * @return array
      * @throws YunXinArgExcetption
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
+     * @throws YunXinInnerException
      */
     public function updateMyRoomRole(
         $roomId,
@@ -1009,7 +1074,19 @@ class ChatRoom extends Base
         return $res;
     }
 
-
+    /**
+     * 批量更新聊天室队列元素
+     * @param $roomId
+     * @param $operator
+     * @param  array  $elements
+     * @param  bool  $needNotify
+     * @param  string  $notifyExt
+     * @return mixed
+     * @throws YunXinArgExcetption
+     * @throws YunXinBusinessException
+     * @throws YunXinInnerException
+     * @throws YunXinNetworkException
+     */
     public function queueBatchUpdateElements($roomId, $operator, array $elements, $needNotify = true, $notifyExt = '')
     {
         if (!is_int($roomId)) {
