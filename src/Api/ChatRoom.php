@@ -706,6 +706,85 @@ class ChatRoom extends Base
         return $res;
     }
 
+    /**
+     * 发送视频消息
+     * @param $roomId
+     * @param $msgId
+     * @param $fromAccid
+     * @param  int  $audioDur
+     * @param  string  $audioMD5
+     * @param  string  $audioUrl
+     * @param  string  $audioExt
+     * @param  int  $audioSize
+     * @param  null  $resendFlag
+     * @param  array  $ext
+     * @param  string  $antispam
+     * @param  array  $antispamCustom
+     * @param  int  $skipHistory
+     * @param $bid
+     * @param  bool  $highPriority
+     * @param $useYidun
+     * @param  bool  $needHighPriorityMsgResend
+     * @return array
+     * @throws YunXinArgExcetption
+     */
+    public function sendVideoMsg(
+        $roomId,
+        $msgId,
+        $fromAccid,
+        $videoDur,
+        $videoMD5,
+        $videoUrl,
+        $videoExt,
+        $videoSize,
+        $resendFlag = null,
+        array $ext = [],
+        $antispam = 'false',
+        array $antispamCustom = [],
+        $skipHistory = 0,
+        $bid = null,
+        $highPriority = false,
+        $useYidun = null,
+        $needHighPriorityMsgResend = true
+    ) {
+        $videoSize = intval($videoSize);
+
+        if (!$videoDur) {
+            throw new YunXinArgExcetption('语音时长不能为0！');
+        }
+        if (!$videoSize) {
+            throw new YunXinArgExcetption('语音文件尺寸不能为0！');
+        }
+        if (!is_string($videoExt)) {
+            throw new YunXinArgExcetption('语音文件后缀只能为acc！');
+        }
+
+        $body = json_encode([
+            "dur" => $videoDur,   // 语音持续时长ms
+            "md5" => $videoMD5,    // 语音文件的md5值
+            "url" => $videoUrl,    // 生成的url
+            "ext" => $videoExt,    // 语音消息格式，只能是aac格式
+            "size" => $videoSize    // 语音文件大小
+        ]);
+
+        $res = $this->sendMsg(
+            $roomId,
+            $msgId,
+            $fromAccid,
+            self::CHAT_TYPE_VIDEO,
+            $resendFlag,
+            $body,
+            $ext,
+            $antispam,
+            $antispamCustom,
+            $skipHistory,
+            $bid,
+            $highPriority,
+            $useYidun,
+            $needHighPriorityMsgResend
+        );
+        return $res;
+    }
 
     /**
      * @param $roomId
