@@ -1,21 +1,22 @@
 {
-    "name": "nizerin/yun-xin-helper",
-    "description": " 网易云信 IM SDK fro PHP , IM ,聊天室，直播间",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "nizerin",
-            "email": "nizerin98@gmail.com"
-        }
-    ],
-    "require": {
-        "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "YunXinHelper\\": "src"
-        }
+  "name": "nizerin/yun-xin-helper",
+  "description": " 网易云信 IM SDK fro PHP , IM ,聊天室，直播间",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "nizerin",
+      "email": "nizerin98@gmail.com"
     }
+  ],
+  "require": {
+    "php": "^7.0.0",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "YunXinHelper\\": "src"
+    }
+  }
 }
