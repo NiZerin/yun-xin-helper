@@ -1,0 +1,26 @@
+language: php
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.1
+    - php: 7.2
+    - php: 7.3
+
+sudo: false
+
+before_install:
+  - travis_retry composer self-update
+  - sudo apt-get update
+  - sudo apt-get install -y redis
+
+install:
+  - travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest
+
+script:
+  - ./vendor/bin/phplint
+  - ./vendor/bin/php-cs-fixer fix $1
+  - ./vendor/bin/phpunit --coverage-text
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
