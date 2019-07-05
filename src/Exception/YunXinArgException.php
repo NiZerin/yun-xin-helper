@@ -10,7 +10,7 @@ namespace YunXinHelper\Exception;
 
 use Exception;
 
-class YunXinArgExcetption extends Exception
+class YunXinArgException extends Exception
 {
 
 }

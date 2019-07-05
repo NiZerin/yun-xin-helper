@@ -10,7 +10,7 @@ namespace YunXinHelper\Api;
 
 use GuzzleHttp\Exception\GuzzleException;
 use LogicException;
-use YunXinHelper\Exception\YunXinArgExcetption;
+use YunXinHelper\Exception\YunXinArgException;
 use YunXinHelper\Exception\YunXinBusinessException;
 use YunXinHelper\Exception\YunXinInnerException;
 use YunXinHelper\Exception\YunXinNetworkException;
@@ -53,7 +53,7 @@ class User extends Base
      * @param $mobile
      * @param $gender
      * @param $ex
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      */
     private function verifyUserInfo(
         $accid,
@@ -75,34 +75,34 @@ class User extends Base
             throw new LogicException('accid 不合法！');
         }
         if (strlen($name) > self::USER_NAME_LIMIT) {
-            throw new YunXinArgExcetption('用户昵称最大长度' . self::USER_NAME_LIMIT . '字符！');
+            throw new YunXinArgException('用户昵称最大长度' . self::USER_NAME_LIMIT . '字符！');
         }
         if (strlen($propsStr) > self::USER_PROPS_LIMIT) {
-            throw new YunXinArgExcetption('用户props最大长度' . self::USER_PROPS_LIMIT . '字符！');
+            throw new YunXinArgException('用户props最大长度' . self::USER_PROPS_LIMIT . '字符！');
         }
         if (strlen($icon) > self::USER_ICON_LIMIT) {
-            throw new YunXinArgExcetption('用户头像URL最大长度' . self::USER_ICON_LIMIT . '字符！');
+            throw new YunXinArgException('用户头像URL最大长度' . self::USER_ICON_LIMIT . '字符！');
         }
         if (strlen($token) > self::USER_TOKEN_LIMIT) {
-            throw new YunXinArgExcetption('用户token最大长度' . self::USER_TOKEN_LIMIT . '字符！');
+            throw new YunXinArgException('用户token最大长度' . self::USER_TOKEN_LIMIT . '字符！');
         }
         if (strlen($sign) > self::USER_SIGN_LIMIT) {
-            throw new YunXinArgExcetption('用户sign最大长度' . self::USER_SIGN_LIMIT . '字符！');
+            throw new YunXinArgException('用户sign最大长度' . self::USER_SIGN_LIMIT . '字符！');
         }
         if (strlen($email) > self::USER_EMAIL_LIMIT) {
-            throw new YunXinArgExcetption('用户邮箱最大长度' . self::USER_EMAIL_LIMIT . '字符！');
+            throw new YunXinArgException('用户邮箱最大长度' . self::USER_EMAIL_LIMIT . '字符！');
         }
         if (strlen($birth) > self::USER_BIRTH_LIMIT) {
-            throw new YunXinArgExcetption('用户生日最大长度' . self::USER_BIRTH_LIMIT . '字符！');
+            throw new YunXinArgException('用户生日最大长度' . self::USER_BIRTH_LIMIT . '字符！');
         }
         if (strlen($mobile) > self::USER_MOBILE_LIMIT) {
-            throw new YunXinArgExcetption('用户手机号最大长度' . self::USER_MOBILE_LIMIT . '字符！');
+            throw new YunXinArgException('用户手机号最大长度' . self::USER_MOBILE_LIMIT . '字符！');
         }
         if (!in_array($gender, self::USER_GENDER_TYPES)) {
-            throw new YunXinArgExcetption('用户性别不合法！');
+            throw new YunXinArgException('用户性别不合法！');
         }
         if (strlen($ex) > self::USER_EX_LIMIT) {
-            throw new YunXinArgExcetption('用户名片扩展最大长度' . self::USER_EX_LIMIT . '字符！');
+            throw new YunXinArgException('用户名片扩展最大长度' . self::USER_EX_LIMIT . '字符！');
         }
     }
 
@@ -121,7 +121,7 @@ class User extends Base
      * @param  int  $gender  用户性别，0表示未知，1表示男，2女表示女
      * @param  string  $ex
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -165,7 +165,7 @@ class User extends Base
      * @param  array  $props
      * @param  string  $token
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -188,7 +188,7 @@ class User extends Base
      * 更新并获取新token
      * @param  string  $accid
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -210,7 +210,7 @@ class User extends Base
      * @param  string  $accid
      * @param  bool  $kick
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -232,7 +232,7 @@ class User extends Base
      * 解禁网易云通信ID
      * @param $accid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -261,7 +261,7 @@ class User extends Base
      * @param $gender
      * @param $ex
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -299,7 +299,7 @@ class User extends Base
      * 获取用户名片，可以批量
      * @param  array  $accids
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -308,10 +308,10 @@ class User extends Base
     public function getUserInfos(array $accids)
     {
         if (empty($accids)) {
-            throw new YunXinArgExcetption('查询用户不能为空！');
+            throw new YunXinArgException('查询用户不能为空！');
         }
         if (count($accids) > self::GET_UINFOS_LIMIT) {
-            throw new YunXinArgExcetption('查询用户数量超过限制！');
+            throw new YunXinArgException('查询用户数量超过限制！');
         }
         $res = $this->sendRequest('user/getUinfos.action', [
             'accids' => json_encode($accids)

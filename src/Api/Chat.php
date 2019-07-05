@@ -9,7 +9,7 @@ namespace YunXinHelper\Api;
 
 
 use GuzzleHttp\Exception\GuzzleException;
-use YunXinHelper\Exception\YunXinArgExcetption;
+use YunXinHelper\Exception\YunXinArgException;
 use YunXinHelper\Exception\YunXinBusinessException;
 use YunXinHelper\Exception\YunXinInnerException;
 use YunXinHelper\Exception\YunXinNetworkException;
@@ -54,10 +54,11 @@ class Chat extends Base
      * @param  int  $markRead
      * @param  string  $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
+     * @throws GuzzleException
      */
     private function sendMsg(
         $accidFrom,
@@ -80,24 +81,24 @@ class Chat extends Base
         $checkFriend = 'false'
     ) {
         if (!$accidFrom || !is_string($accidFrom)) {
-            throw new YunXinArgExcetption('发送者id不能为空！');
+            throw new YunXinArgException('发送者id不能为空！');
         }
         if (strlen($accidFrom) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('发送者id超过限制！');
+            throw new YunXinArgException('发送者id超过限制！');
         }
         if (!$accidTo || !is_string($accidTo)) {
-            throw new YunXinArgExcetption('接受者id不能为空！');
+            throw new YunXinArgException('接受者id不能为空！');
         }
         if (strlen($accidTo) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('接受者id超过限制！');
+            throw new YunXinArgException('接受者id超过限制！');
         }
 
         if (strlen($body) > self::CHAT_MSG_BODY_LIMIT) {
-            throw new YunXinArgExcetption('body内容超过限制！');
+            throw new YunXinArgException('body内容超过限制！');
         }
         $openLegalArr = [self::CHAT_ONT_TO_ONE, self::CHAT_ONT_TO_GROUP];
         if (!in_array($open, $openLegalArr)) {
-            throw new YunXinArgExcetption('send msg open参数不合法');
+            throw new YunXinArgException('send msg open参数不合法');
         }
 
         $res = $this->sendRequest('msg/sendMsg.action', [
@@ -143,7 +144,7 @@ class Chat extends Base
      * @param  int  $markRead
      * @param  bool  $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -220,7 +221,7 @@ class Chat extends Base
      * @param  int  $markRead
      * @param  bool  $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -254,10 +255,10 @@ class Chat extends Base
         $picHeight = intval($picHeight);
         $picSize = intval($picSize);
         if (!$picWidth || !$picHeight) {
-            throw new YunXinArgExcetption('图片宽度和高度不能为0！');
+            throw new YunXinArgException('图片宽度和高度不能为0！');
         }
         if (!$picSize) {
-            throw new YunXinArgExcetption('图片尺寸不能为0！');
+            throw new YunXinArgException('图片尺寸不能为0！');
         }
 
         $body = json_encode([
@@ -318,7 +319,7 @@ class Chat extends Base
      * @param  int  $markRead
      * @param  bool  $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -349,13 +350,13 @@ class Chat extends Base
         $audioSize = intval($audioSize);
 
         if (!$audioDur) {
-            throw new YunXinArgExcetption('语音时长不能为0！');
+            throw new YunXinArgException('语音时长不能为0！');
         }
         if (!$audioSize) {
-            throw new YunXinArgExcetption('语音文件尺寸不能为0！');
+            throw new YunXinArgException('语音文件尺寸不能为0！');
         }
         if (!is_string($audioExt) || $audioExt != 'aac') {
-            throw new YunXinArgExcetption('语音文件后缀只能为acc！');
+            throw new YunXinArgException('语音文件后缀只能为acc！');
         }
 
         $body = json_encode([
@@ -416,7 +417,7 @@ class Chat extends Base
      * @param  int  $markRead
      * @param  bool  $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -452,13 +453,13 @@ class Chat extends Base
         $videoSize = intval($videoSize);
 
         if (!$videoDur) {
-            throw new YunXinArgExcetption('视频时长不能为0！');
+            throw new YunXinArgException('视频时长不能为0！');
         }
         if (!$videoWidth || $videoHeight) {
-            throw new YunXinArgExcetption('视频宽度和高度不能为0！');
+            throw new YunXinArgException('视频宽度和高度不能为0！');
         }
         if (!$videoSize) {
-            throw new YunXinArgExcetption('视频文件尺寸不能为0！');
+            throw new YunXinArgException('视频文件尺寸不能为0！');
         }
 
         $body = json_encode([
@@ -517,7 +518,7 @@ class Chat extends Base
      * @param $markRead
      * @param $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -599,7 +600,7 @@ class Chat extends Base
      * @param $markRead
      * @param $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -631,7 +632,7 @@ class Chat extends Base
         $fileSize = intval($fileSize);
 
         if (!$fileSize) {
-            throw new YunXinArgExcetption('文件尺寸不能为0！');
+            throw new YunXinArgException('文件尺寸不能为0！');
         }
 
         $body = json_encode([
@@ -685,7 +686,7 @@ class Chat extends Base
      * @param $markRead
      * @param $checkFriend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -750,7 +751,7 @@ class Chat extends Base
      * @param  int  $useYidun
      * @param $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -770,19 +771,19 @@ class Chat extends Base
         $returnMsgid = false
     ) {
         if (!$accidFrom || !is_string($accidFrom)) {
-            throw new YunXinArgExcetption('发送者id不能为空！');
+            throw new YunXinArgException('发送者id不能为空！');
         }
         if (strlen($accidFrom) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('发送者id超过限制！');
+            throw new YunXinArgException('发送者id超过限制！');
         }
         if (empty($accidsTo)) {
-            throw new YunXinArgExcetption('接受者id组不能为空！');
+            throw new YunXinArgException('接受者id组不能为空！');
         }
         if (count($accidsTo) > self::CHAT_SEND_LIMIT) {
-            throw new YunXinArgExcetption('接受者人数' . count($accidsTo) . '超过限制！');
+            throw new YunXinArgException('接受者人数' . count($accidsTo) . '超过限制！');
         }
         if (strlen($body) > self::CHAT_MSG_BODY_LIMIT) {
-            throw new YunXinArgExcetption('body内容超过限制！');
+            throw new YunXinArgException('body内容超过限制！');
         }
 
         $res = $this->sendRequest('msg/sendBatchMsg.action', [
@@ -814,7 +815,7 @@ class Chat extends Base
      * @param  int  $useYidun
      * @param $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -871,7 +872,7 @@ class Chat extends Base
      * @param  int  $useYidun
      * @param  bool  $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -899,10 +900,10 @@ class Chat extends Base
         $picSize = intval($picSize);
 
         if (!$picWidth || $picHeight) {
-            throw new YunXinArgExcetption('图片宽度和高度不能为0！');
+            throw new YunXinArgException('图片宽度和高度不能为0！');
         }
         if (!$picSize) {
-            throw new YunXinArgExcetption('图片尺寸不能为0！');
+            throw new YunXinArgException('图片尺寸不能为0！');
         }
 
         $body = json_encode([
@@ -948,7 +949,7 @@ class Chat extends Base
      * @param  int  $useYidun
      * @param $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -974,13 +975,13 @@ class Chat extends Base
         $audioSize = intval($audioSize);
 
         if (!$audioDur) {
-            throw new YunXinArgExcetption('语音时长不能为0！');
+            throw new YunXinArgException('语音时长不能为0！');
         }
         if (!$audioSize) {
-            throw new YunXinArgExcetption('语音文件尺寸不能为0！');
+            throw new YunXinArgException('语音文件尺寸不能为0！');
         }
         if (!is_string($audioExt) || $audioExt != 'aac') {
-            throw new YunXinArgExcetption('语音文件后缀只能为acc！');
+            throw new YunXinArgException('语音文件后缀只能为acc！');
         }
 
         $body = json_encode([
@@ -1026,7 +1027,7 @@ class Chat extends Base
      * @param $useYidun
      * @param $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1056,13 +1057,13 @@ class Chat extends Base
         $videoSize = intval($videoSize);
 
         if (!$videoDur) {
-            throw new YunXinArgExcetption('视频时长不能为0！');
+            throw new YunXinArgException('视频时长不能为0！');
         }
         if (!$videoWidth || $videoHeight) {
-            throw new YunXinArgExcetption('视频宽度和高度不能为0！');
+            throw new YunXinArgException('视频宽度和高度不能为0！');
         }
         if (!$videoSize) {
-            throw new YunXinArgExcetption('视频文件尺寸不能为0！');
+            throw new YunXinArgException('视频文件尺寸不能为0！');
         }
 
         $body = json_encode([
@@ -1107,7 +1108,7 @@ class Chat extends Base
      * @param $useYidun
      * @param $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1167,7 +1168,7 @@ class Chat extends Base
      * @param $useYidun
      * @param  bool  $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -1191,7 +1192,7 @@ class Chat extends Base
         $fileSize = intval($fileSize);
 
         if (!$fileSize) {
-            throw new YunXinArgExcetption('文件尺寸不能为0！');
+            throw new YunXinArgException('文件尺寸不能为0！');
         }
 
         $body = json_encode([
@@ -1231,7 +1232,7 @@ class Chat extends Base
      * @param $useYidun
      * @param  bool  $returnMsgid
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -1274,7 +1275,7 @@ class Chat extends Base
      * @param $pushContent
      * @param $payload
      * @param $save
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      */
     private function verifyAttachMsg(
         $from,
@@ -1289,29 +1290,29 @@ class Chat extends Base
         $msgType = intval($msgType);
 
         if (empty($from)) {
-            throw new YunXinArgExcetption('发送者id不能为空！');
+            throw new YunXinArgException('发送者id不能为空！');
         }
         if (strlen($from) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('发送者id超过限制！');
+            throw new YunXinArgException('发送者id超过限制！');
         }
         if (!in_array($msgType, $msgLegalTypes)) {
-            throw new YunXinArgExcetption('msgtype不合法！');
+            throw new YunXinArgException('msgtype不合法！');
         }
         if (!in_array($save, $saveLegalTypes)) {
-            throw new YunXinArgExcetption('save类型不合法！');
+            throw new YunXinArgException('save类型不合法！');
         }
         if (empty($attachStr)) {
-            throw new YunXinArgExcetption('attach内容不能为空！');
+            throw new YunXinArgException('attach内容不能为空！');
         }
         if (strlen($pushContent) > self::CHAT_ATTACH_MSG_PUSH_CONTENT_LIMIT) {
-            throw new YunXinArgExcetption('推送内容不超过500字符！');
+            throw new YunXinArgException('推送内容不超过500字符！');
         }
 
         if (strlen($attachStr) > self::CHAT_ATTACH_MSG_ATTACH_LIMIT) {
-            throw new YunXinArgExcetption('attach内容最大长度4096字符！');
+            throw new YunXinArgException('attach内容最大长度4096字符！');
         }
         if (strlen($payload) > self::CHAT_ATTACH_MSG_PAYLOAD_LIMIT) {
-            throw new YunXinArgExcetption('payload不超过2k字符！');
+            throw new YunXinArgException('payload不超过2k字符！');
         }
     }
 
@@ -1327,7 +1328,7 @@ class Chat extends Base
      * @param $save
      * @param $option
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1355,10 +1356,10 @@ class Chat extends Base
         $this->verifyAttachMsg($from, $msgType,
             $attachStr, $pushContent, $payload, $save);
         if (!$to || !is_string($to)) {
-            throw new YunXinArgExcetption('接受者id不能为空！');
+            throw new YunXinArgException('接受者id不能为空！');
         }
         if (strlen($to) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('接受者id超过限制！');
+            throw new YunXinArgException('接受者id超过限制！');
         }
 
 
@@ -1388,7 +1389,7 @@ class Chat extends Base
      * @param  int  $save
      * @param  string  $option
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
@@ -1414,7 +1415,7 @@ class Chat extends Base
         $this->verifyAttachMsg($from, self::CHAT_ONT_TO_ONE,
             $attachStr, $pushContent, $payload, $save);
         if (empty($toAccids)) {
-            throw new YunXinArgExcetption('接受者id组不能为空！');
+            throw new YunXinArgException('接受者id组不能为空！');
         }
 
         $res = $this->sendRequest('msg/sendBatchAttachMsg.action', [
@@ -1439,7 +1440,7 @@ class Chat extends Base
      * @param  int  $expireSec
      * @param  string  $tag
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1451,7 +1452,7 @@ class Chat extends Base
             $expireSec = intval($expireSec);
         }
         if ($expireSec > 0 && $expireSec < self::ONE_DAY_SECONDS) {
-            throw new YunXinArgExcetption('文件过期时间必须大于等于86400！');
+            throw new YunXinArgException('文件过期时间必须大于等于86400！');
         }
         $data = [
             'content' => $content,
@@ -1480,7 +1481,7 @@ class Chat extends Base
      * @param  string  $pushContent
      * @param $payload
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1501,16 +1502,16 @@ class Chat extends Base
         $type = intval($type);
 
         if (empty($deleteMsgid)) {
-            throw new YunXinArgExcetption('撤回msg id不能为空！');
+            throw new YunXinArgException('撤回msg id不能为空！');
         }
         if (empty($timetag)) {
-            throw new YunXinArgExcetption('撤回msg创建时间不能为空！');
+            throw new YunXinArgException('撤回msg创建时间不能为空！');
         }
         if (!in_array($type, $typesLegal)) {
-            throw new YunXinArgExcetption('撤回type错误！');
+            throw new YunXinArgException('撤回type错误！');
         }
         if (strlen($pushContent) > self::CHAT_ATTACH_MSG_PUSH_CONTENT_LIMIT) {
-            throw new YunXinArgExcetption('推送内容不超过500字符！');
+            throw new YunXinArgException('推送内容不超过500字符！');
         }
 
         $res = $this->sendRequest('msg/recall.action', [
@@ -1535,7 +1536,7 @@ class Chat extends Base
      * @param $ttl
      * @param  array  $targetOs
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1544,10 +1545,10 @@ class Chat extends Base
     public function broadcastMsg($body, $from, $isOffline = false, $ttl, array $targetOs)
     {
         if (empty($body)) {
-            throw new YunXinArgExcetption('body不能为空！');
+            throw new YunXinArgException('body不能为空！');
         }
         if (empty($from)) {
-            throw new YunXinArgExcetption('发送者id不能为空！');
+            throw new YunXinArgException('发送者id不能为空！');
         }
 
         $data = [

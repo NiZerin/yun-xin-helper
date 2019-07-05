@@ -9,7 +9,7 @@ namespace YunXinHelper\Api;
 
 
 use GuzzleHttp\Exception\GuzzleException;
-use YunXinHelper\Exception\YunXinArgExcetption;
+use YunXinHelper\Exception\YunXinArgException;
 use YunXinHelper\Exception\YunXinBusinessException;
 use YunXinHelper\Exception\YunXinInnerException;
 use YunXinHelper\Exception\YunXinNetworkException;
@@ -62,7 +62,7 @@ class ChatRoom extends Base
      * @param  string  $ext
      * @param  int  $queuelevel
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -71,29 +71,29 @@ class ChatRoom extends Base
     public function create($creator, $name, $announcement = '', $broadcasturl = '', $ext = '', $queuelevel = 0)
     {
         if (!$creator || !is_string($creator)) {
-            throw new YunXinArgExcetption('创建者id不能为空！');
+            throw new YunXinArgException('创建者id不能为空！');
         }
         if (strlen($creator) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('创建者id超过限制！');
+            throw new YunXinArgException('创建者id超过限制！');
         }
         if (!$name) {
-            throw new YunXinArgExcetption('聊天室名称不能为空！');
+            throw new YunXinArgException('聊天室名称不能为空！');
         }
         if (strlen($name) > self::CHAT_ROOM_NAME_LIMIT) {
-            throw new YunXinArgExcetption('聊天室公告超过限制！');
+            throw new YunXinArgException('聊天室公告超过限制！');
         }
         if (strlen($announcement) > self::CHAT_ROOM_ANNOUNCEMENT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室公告超过限制！');
+            throw new YunXinArgException('聊天室公告超过限制！');
         }
         if (strlen($broadcasturl) > self::CHAT_ROOM_BROADCASTURL_LIMIT) {
-            throw new YunXinArgExcetption('聊天室直播地址超过限制！');
+            throw new YunXinArgException('聊天室直播地址超过限制！');
         }
         if (strlen($ext) > self::CHAT_ROOM_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室扩展字段超过限制！');
+            throw new YunXinArgException('聊天室扩展字段超过限制！');
         }
         $levelLegalArr = [self::QUEUE_LEVEL_ALL, self::QUEUE_LEVEL_ADMIN];
         if (!in_array($queuelevel, $levelLegalArr)) {
-            throw new YunXinArgExcetption('聊天室queuelevel参数不合法');
+            throw new YunXinArgException('聊天室queuelevel参数不合法');
         }
 
         $res = $this->sendRequest('chatroom/create.action', [
@@ -113,7 +113,7 @@ class ChatRoom extends Base
      * @param $roomId
      * @param  bool  $needOnlineUserCount
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -122,7 +122,7 @@ class ChatRoom extends Base
     public function get($roomId, $needOnlineUserCount = false)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
 
         $res = $this->sendRequest('chatroom/get.action', [
@@ -137,7 +137,7 @@ class ChatRoom extends Base
      * @param array $roomIds
      * @param bool $needOnlineUserCount
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
@@ -146,7 +146,7 @@ class ChatRoom extends Base
     public function getBatch(array $roomIds, $needOnlineUserCount = false)
     {
         if (empty($roomIds)) {
-            throw new YunXinArgExcetption('房间id列表不能为空！');
+            throw new YunXinArgException('房间id列表不能为空！');
         }
 
         $res = $this->sendRequest('chatroom/getBatch.action', [
@@ -167,7 +167,7 @@ class ChatRoom extends Base
      * @param null $notifyExt
      * @param null $queuelevel
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
@@ -184,26 +184,26 @@ class ChatRoom extends Base
         $queuelevel = null
     ) {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (strlen($name) > self::CHAT_ROOM_NAME_LIMIT) {
-            throw new YunXinArgExcetption('聊天室公告超过限制！');
+            throw new YunXinArgException('聊天室公告超过限制！');
         }
         if (strlen($announcement) > self::CHAT_ROOM_ANNOUNCEMENT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室公告超过限制！');
+            throw new YunXinArgException('聊天室公告超过限制！');
         }
         if (strlen($broadcasturl) > self::CHAT_ROOM_BROADCASTURL_LIMIT) {
-            throw new YunXinArgExcetption('聊天室直播地址超过限制！');
+            throw new YunXinArgException('聊天室直播地址超过限制！');
         }
         if (strlen($ext) > self::CHAT_ROOM_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室扩展字段超过限制！');
+            throw new YunXinArgException('聊天室扩展字段超过限制！');
         }
         $levelLegalArr = [self::QUEUE_LEVEL_ALL, self::QUEUE_LEVEL_ADMIN];
         if (is_numeric($queuelevel) && !in_array($queuelevel, $levelLegalArr)) {
-            throw new YunXinArgExcetption('聊天室queuelevel参数不合法');
+            throw new YunXinArgException('聊天室queuelevel参数不合法');
         }
         if (strlen($notifyExt) > self::CHAT_ROOM_NOTIFY_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室通知事件扩展字段超过限制！');
+            throw new YunXinArgException('聊天室通知事件扩展字段超过限制！');
         }
         $data = [
             'roomid' => $roomId,
@@ -241,7 +241,7 @@ class ChatRoom extends Base
      * @param $operator
      * @param $valid
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
@@ -250,10 +250,10 @@ class ChatRoom extends Base
     public function toggleCloseStatus($roomId, $operator, $valid)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!is_bool($valid)) {
-            throw new YunXinArgExcetption('设置房间状态valid参数应该为bool类型！');
+            throw new YunXinArgException('设置房间状态valid参数应该为bool类型！');
         }
 
         $res = $this->sendRequest('chatroom/toggleCloseStat.action', [
@@ -274,7 +274,7 @@ class ChatRoom extends Base
      * @param $optValue
      * @param  string  $notifyExt
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -283,13 +283,13 @@ class ChatRoom extends Base
     public function setMemberRole($roomId, $operator, $target, $opt, $optValue, $notifyExt = '')
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$operator || !is_string($operator)) {
-            throw new YunXinArgExcetption('操作者id不能为空！');
+            throw new YunXinArgException('操作者id不能为空！');
         }
         if (!$target || !is_string($target)) {
-            throw new YunXinArgExcetption('被操作者id不能为空！');
+            throw new YunXinArgException('被操作者id不能为空！');
         }
         $optLegalArr = [
             self::MEMBER_ROLE_ADMIN,
@@ -298,14 +298,14 @@ class ChatRoom extends Base
             self::MEMBER_ROLE_GAG
         ];
         if (!in_array($opt, $optLegalArr)) {
-            throw new YunXinArgExcetption('opt参数不合法');
+            throw new YunXinArgException('opt参数不合法');
         }
         if (!is_bool($optValue)) {
-            throw new YunXinArgExcetption('optValue参数应该为bool类型！');
+            throw new YunXinArgException('optValue参数应该为bool类型！');
         }
 
         if (strlen($notifyExt) > self::CHAT_ROOM_NOTIFY_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室通知事件扩展字段超过限制！');
+            throw new YunXinArgException('聊天室通知事件扩展字段超过限制！');
         }
 
         $res = $this->sendRequest('chatroom/setMemberRole.action', [
@@ -323,13 +323,13 @@ class ChatRoom extends Base
     public function requestAddr($roomId, $accid, $clientType = 1, $clientIP = '')
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$accid || !is_string($accid)) {
-            throw new YunXinArgExcetption('进入聊天室账号id不能为空！');
+            throw new YunXinArgException('进入聊天室账号id不能为空！');
         }
         if (strlen($accid) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('进入聊天室账号id超过限制！');
+            throw new YunXinArgException('进入聊天室账号id超过限制！');
         }
 
         $clientTypeLegalArr = [
@@ -338,7 +338,7 @@ class ChatRoom extends Base
             self::CLIENT_TYPE_WECHATLINK,
         ];
         if (!in_array($clientType, $clientTypeLegalArr)) {
-            throw new YunXinArgExcetption('clientType参数不合法');
+            throw new YunXinArgException('clientType参数不合法');
         }
         $res = $this->sendRequest('chatroom/requestAddr.action', [
             'roomid' => $roomId,
@@ -367,43 +367,43 @@ class ChatRoom extends Base
         $needHighPriorityMsgResend = true
     ) {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$msgId) {
-            throw new YunXinArgExcetption('msgid不能为空！');
+            throw new YunXinArgException('msgid不能为空！');
         }
         if (!$fromAccid || !is_string($fromAccid)) {
-            throw new YunXinArgExcetption('发送者id不能为空！');
+            throw new YunXinArgException('发送者id不能为空！');
         }
         if (strlen($fromAccid) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('发送者id超过限制！');
+            throw new YunXinArgException('发送者id超过限制！');
         }
         if (strlen($attach) > self::CHAT_ROOM_ATTACH_LIMIT) {
-            throw new YunXinArgExcetption('消息内容超过限制！');
+            throw new YunXinArgException('消息内容超过限制！');
         }
         $extStr = '';
         if ($ext) {
             $extStr = json_encode($ext);
         }
         if (strlen($extStr) > self::CHAT_ROOM_EXT_LIMIT) {
-            throw new YunXinArgExcetption('消息扩展字段超过限制！');
+            throw new YunXinArgException('消息扩展字段超过限制！');
         }
         $antispamCustomStr = '';
         if ($antispamCustom) {
             $antispamCustomStr = json_encode($antispamCustom);
         }
         if ($antispamCustomStr > 5000) {
-            throw new YunXinArgExcetption('自定义的反垃圾检测内容超过限制！');
+            throw new YunXinArgException('自定义的反垃圾检测内容超过限制！');
         }
         $skipHistoryLegalTypes = [self::CHAT_ROOM_SKIP_NON_HISTORY, self::CHAT_ROOM_SKIP_HISTORY];
         if (!in_array($skipHistory, $skipHistoryLegalTypes)) {
-            throw new YunXinArgExcetption('skipHistory参数不合法');
+            throw new YunXinArgException('skipHistory参数不合法');
         }
         if (!is_bool($highPriority)) {
-            throw new YunXinArgExcetption('highPriority参数应该为bool');
+            throw new YunXinArgException('highPriority参数应该为bool');
         }
         if (!is_bool($needHighPriorityMsgResend)) {
-            throw new YunXinArgExcetption('needHighPriorityMsgResend参数应该为bool');
+            throw new YunXinArgException('needHighPriorityMsgResend参数应该为bool');
         }
 
 
@@ -443,7 +443,7 @@ class ChatRoom extends Base
      * @param  null  $useYidun
      * @param  bool  $needHighPriorityMsgResend
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      */
     public function sendTextMsg(
         $roomId,
@@ -461,7 +461,7 @@ class ChatRoom extends Base
         $needHighPriorityMsgResend = true
     ) {
         if (!$text) {
-            throw new YunXinArgExcetption('文本消息内容不能为空！');
+            throw new YunXinArgException('文本消息内容不能为空！');
         }
 
         $body = json_encode($text,256);
@@ -500,7 +500,7 @@ class ChatRoom extends Base
      * @param  null  $useYidun
      * @param  bool  $needHighPriorityMsgResend
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      */
     public function sendTipsMsg(
         $roomId,
@@ -518,7 +518,7 @@ class ChatRoom extends Base
         $needHighPriorityMsgResend = true
     ) {
         if (!$text) {
-            throw new YunXinArgExcetption('提醒消息内容不能为空！');
+            throw new YunXinArgException('提醒消息内容不能为空！');
         }
 
         $body = json_encode($text,256);
@@ -563,7 +563,7 @@ class ChatRoom extends Base
      * @param  null  $useYidun
      * @param  bool  $needHighPriorityMsgResend
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      */
     public function sendPictureMsg(
         $roomId,
@@ -591,10 +591,10 @@ class ChatRoom extends Base
         $picSize = intval($picSize);
 
         if (!$picWidth || !$picHeight) {
-            throw new YunXinArgExcetption('图片宽度和高度不能为0！');
+            throw new YunXinArgException('图片宽度和高度不能为0！');
         }
         if (!$picSize) {
-            throw new YunXinArgExcetption('图片尺寸不能为0！');
+            throw new YunXinArgException('图片尺寸不能为0！');
         }
 
         $body = json_encode([
@@ -646,7 +646,7 @@ class ChatRoom extends Base
      * @param $useYidun
      * @param  bool  $needHighPriorityMsgResend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      */
     public function sendAudioMsg(
         $roomId,
@@ -670,13 +670,13 @@ class ChatRoom extends Base
         $audioSize = intval($audioSize);
 
         if (!$audioDur) {
-            throw new YunXinArgExcetption('语音时长不能为0！');
+            throw new YunXinArgException('语音时长不能为0！');
         }
         if (!$audioSize) {
-            throw new YunXinArgExcetption('语音文件尺寸不能为0！');
+            throw new YunXinArgException('语音文件尺寸不能为0！');
         }
         if (!is_string($audioExt)) {
-            throw new YunXinArgExcetption('语音文件后缀只能为acc！');
+            throw new YunXinArgException('语音文件后缀只能为acc！');
         }
 
         $body = json_encode([
@@ -726,7 +726,7 @@ class ChatRoom extends Base
      * @param $useYidun
      * @param  bool  $needHighPriorityMsgResend
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      */
     public function sendVideoMsg(
         $roomId,
@@ -750,13 +750,13 @@ class ChatRoom extends Base
         $videoSize = intval($videoSize);
 
         if (!$videoDur) {
-            throw new YunXinArgExcetption('语音时长不能为0！');
+            throw new YunXinArgException('语音时长不能为0！');
         }
         if (!$videoSize) {
-            throw new YunXinArgExcetption('语音文件尺寸不能为0！');
+            throw new YunXinArgException('语音文件尺寸不能为0！');
         }
         if (!is_string($videoExt)) {
-            throw new YunXinArgExcetption('语音文件后缀只能为acc！');
+            throw new YunXinArgException('语音文件后缀只能为acc！');
         }
 
         $body = json_encode([
@@ -794,7 +794,7 @@ class ChatRoom extends Base
      * @param bool $needNotify
      * @param string $notifyExt
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
@@ -803,25 +803,25 @@ class ChatRoom extends Base
     public function temporaryMute($roomId, $operator, $target, $muteDuration, $needNotify = true, $notifyExt = '')
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$operator || !is_string($operator)) {
-            throw new YunXinArgExcetption('操作者id不能为空！');
+            throw new YunXinArgException('操作者id不能为空！');
         }
         if (strlen($operator) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('操作者id超过限制！');
+            throw new YunXinArgException('操作者id超过限制！');
         }
         if (!$target || !is_string($target)) {
-            throw new YunXinArgExcetption('目标账号id不能为空！');
+            throw new YunXinArgException('目标账号id不能为空！');
         }
         if (strlen($target) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('目标账号id超过限制！');
+            throw new YunXinArgException('目标账号id超过限制！');
         }
         if (!is_int($muteDuration) || $muteDuration < 0) {
-            throw new YunXinArgExcetption('禁言秒数不合法！');
+            throw new YunXinArgException('禁言秒数不合法！');
         }
         if (strlen($notifyExt) > self::CHAT_ROOM_NOTIFY_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室通知事件扩展字段超过限制！');
+            throw new YunXinArgException('聊天室通知事件扩展字段超过限制！');
         }
 
         $res = $this->sendRequest('chatroom/temporaryMute.action', [
@@ -844,7 +844,7 @@ class ChatRoom extends Base
      * @param  string  $operator
      * @param  bool  $transient
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -853,19 +853,19 @@ class ChatRoom extends Base
     public function queueOffer($roomId, $key, $value, $operator, $transient = false)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$key) {
-            throw new YunXinArgExcetption('元素key不能为空！');
+            throw new YunXinArgException('元素key不能为空！');
         }
         if (strlen($key) > self::CHAT_ROOM_QUEUE_KEY_LIMIT) {
-            throw new YunXinArgExcetption('元素key超过限制！');
+            throw new YunXinArgException('元素key超过限制！');
         }
         if (!$value) {
-            throw new YunXinArgExcetption('元素value不能为空！');
+            throw new YunXinArgException('元素value不能为空！');
         }
         if (strlen($value) > self::CHAT_ROOM_QUEUE_VALUE_LIMIT) {
-            throw new YunXinArgExcetption('元素value超过限制！');
+            throw new YunXinArgException('元素value超过限制！');
         }
 
         $res = $this->sendRequest('chatroom/queueOffer.action', [
@@ -883,7 +883,7 @@ class ChatRoom extends Base
      * @param  int  $roomId
      * @param $key
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -892,7 +892,7 @@ class ChatRoom extends Base
     public function queuePoll($roomId, $key)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         $res = $this->sendRequest('chatroom/queuePoll.action', [
             'roomid' => $roomId,
@@ -906,7 +906,7 @@ class ChatRoom extends Base
      * 列出队列中所有元素
      * @param  int  $roomId
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -915,7 +915,7 @@ class ChatRoom extends Base
     public function queueList($roomId)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         $res = $this->sendRequest('chatroom/queueList.action', [
             'roomid' => $roomId,
@@ -928,7 +928,7 @@ class ChatRoom extends Base
      * 删除清理整个队列
      * @param $roomId
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -937,7 +937,7 @@ class ChatRoom extends Base
     public function queueDrop($roomId)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         $res = $this->sendRequest('chatroom/queueDrop.action', [
             'roomid' => $roomId,
@@ -950,7 +950,7 @@ class ChatRoom extends Base
      * @param $roomId
      * @param $sizeLimit
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -959,10 +959,10 @@ class ChatRoom extends Base
     public function queueInit($roomId, $sizeLimit)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if ($sizeLimit < 0 || $sizeLimit > 1000) {
-            throw new YunXinArgExcetption('队列大小不合法！');
+            throw new YunXinArgException('队列大小不合法！');
         }
         $res = $this->sendRequest('chatroom/queueInit.action', [
             'roomid' => $roomId,
@@ -980,7 +980,7 @@ class ChatRoom extends Base
      * @param  bool  $needNotify
      * @param $notifyExt
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -989,22 +989,22 @@ class ChatRoom extends Base
     public function muteRoom($roomId, $operator, $mute, $needNotify = true, $notifyExt = '')
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$operator || !is_string($operator)) {
-            throw new YunXinArgExcetption('操作者id不能为空！');
+            throw new YunXinArgException('操作者id不能为空！');
         }
         if (strlen($operator) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('操作者id超过限制！');
+            throw new YunXinArgException('操作者id超过限制！');
         }
         if (!is_bool($mute)) {
-            throw new YunXinArgExcetption('参数mute为bool类型！');
+            throw new YunXinArgException('参数mute为bool类型！');
         }
         if (!is_bool($needNotify)) {
-            throw new YunXinArgExcetption('参数needNotify为bool类型！');
+            throw new YunXinArgException('参数needNotify为bool类型！');
         }
         if (strlen($notifyExt) > self::CHAT_ROOM_NOTIFY_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室通知事件扩展字段超过限制！');
+            throw new YunXinArgException('聊天室通知事件扩展字段超过限制！');
         }
 
         $res = $this->sendRequest('chatroom/muteRoom.action', [
@@ -1025,7 +1025,7 @@ class ChatRoom extends Base
      * @param  int  $endTime
      * @param  int  $limit
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1034,7 +1034,7 @@ class ChatRoom extends Base
     public function getMembersByPage($roomId, $type, $endTime, $limit)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         $legalTypes = [
             self::CHAT_ROOM_MEMBER_TYPE_FIXED,
@@ -1042,16 +1042,16 @@ class ChatRoom extends Base
             self::CHAT_ROOM_MEMBER_TYPE_FIXED_ONLINE
         ];
         if (!in_array($type, $legalTypes)) {
-            throw new YunXinArgExcetption('成员type不合法！');
+            throw new YunXinArgException('成员type不合法！');
         }
         if (!is_int($endTime)) {
-            throw new YunXinArgExcetption('endtime参数不合法！');
+            throw new YunXinArgException('endtime参数不合法！');
         }
         if (!is_int($limit)) {
-            throw new YunXinArgExcetption('获取成员条数不合法！');
+            throw new YunXinArgException('获取成员条数不合法！');
         }
         if ($limit > 100) {
-            throw new YunXinArgExcetption('获取成员条数不能超过100条！');
+            throw new YunXinArgException('获取成员条数不能超过100条！');
         }
         $res = $this->sendRequest('chatroom/membersByPage.action', [
             'roomid' => $roomId,
@@ -1068,7 +1068,7 @@ class ChatRoom extends Base
      * @param  int  $roomId
      * @param  array  $accids
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1077,10 +1077,10 @@ class ChatRoom extends Base
     public function queryOnlineMembers($roomId, array $accids)
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (count($accids) > 200) {
-            throw new YunXinArgExcetption('账号列表最多100条');
+            throw new YunXinArgException('账号列表最多100条');
         }
 
         $res = $this->sendRequest('chatroom/queryMembers.action', [
@@ -1102,7 +1102,7 @@ class ChatRoom extends Base
      * @param  string  $avator
      * @param  string  $ext
      * @return array
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws GuzzleException
      * @throws YunXinBusinessException
      * @throws YunXinNetworkException
@@ -1119,25 +1119,25 @@ class ChatRoom extends Base
         $ext = ''
     ) {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$accid || !is_string($accid)) {
-            throw new YunXinArgExcetption('进入聊天室账号id不能为空！');
+            throw new YunXinArgException('进入聊天室账号id不能为空！');
         }
         if (strlen($accid) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('进入聊天室账号id超过限制！');
+            throw new YunXinArgException('进入聊天室账号id超过限制！');
         }
         if (!is_bool($save)) {
-            throw new YunXinArgExcetption('参数save为bool类型！');
+            throw new YunXinArgException('参数save为bool类型！');
         }
         if (!is_bool($needNotify)) {
-            throw new YunXinArgExcetption('参数needNotify为bool类型！');
+            throw new YunXinArgException('参数needNotify为bool类型！');
         }
         if (strlen($notifyExt) > self::CHAT_ROOM_NOTIFY_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室通知事件扩展字段超过限制！');
+            throw new YunXinArgException('聊天室通知事件扩展字段超过限制！');
         }
         if (strlen($nick) > 64) {
-            throw new YunXinArgExcetption('聊天室昵称不超过64个字符！');
+            throw new YunXinArgException('聊天室昵称不超过64个字符！');
         }
 
         $res = $this->sendRequest('chatroom/updateMyRoomRole.action', [
@@ -1161,33 +1161,34 @@ class ChatRoom extends Base
      * @param  bool  $needNotify
      * @param  string  $notifyExt
      * @return mixed
-     * @throws YunXinArgExcetption
+     * @throws YunXinArgException
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
      * @throws YunXinNetworkException
+     * @throws GuzzleException
      */
     public function queueBatchUpdateElements($roomId, $operator, array $elements, $needNotify = true, $notifyExt = '')
     {
         if (!is_int($roomId)) {
-            throw new YunXinArgExcetption('房间id不合法！');
+            throw new YunXinArgException('房间id不合法！');
         }
         if (!$operator || !is_string($operator)) {
-            throw new YunXinArgExcetption('操作者id不能为空！');
+            throw new YunXinArgException('操作者id不能为空！');
         }
         if (strlen($operator) > self::ACCID_LEGAL_LENGTH) {
-            throw new YunXinArgExcetption('操作者id超过限制！');
+            throw new YunXinArgException('操作者id超过限制！');
         }
         if (!$elements) {
-            throw new YunXinArgExcetption('更新元素不能为空！');
+            throw new YunXinArgException('更新元素不能为空！');
         }
         if (count($elements) > 200) {
-            throw new YunXinArgExcetption('更新元素不能不能超过200个！');
+            throw new YunXinArgException('更新元素不能不能超过200个！');
         }
         if (!is_bool($needNotify)) {
-            throw new YunXinArgExcetption('参数needNotify为bool类型！');
+            throw new YunXinArgException('参数needNotify为bool类型！');
         }
         if (strlen($notifyExt) > self::CHAT_ROOM_NOTIFY_EXT_LIMIT) {
-            throw new YunXinArgExcetption('聊天室通知事件扩展字段超过限制！');
+            throw new YunXinArgException('聊天室通知事件扩展字段超过限制！');
         }
 
         $res = $this->sendRequest('chatroom/queueBatchUpdateElements.action', [
