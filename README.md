@@ -1,6 +1,6 @@
 ![https://yunxin.163.com/res/image/base/logo/logo-black@2x.png?v=5](https://yunxin.163.com/res/image/base/logo/logo-black@2x.png?v=5)
 
-![](https://img.shields.io/packagist/dt/nizerin/yun-xin-helper.svg) ![](https://img.shields.io/packagist/v/nizerin/yun-xin-helper.svg) ![Packagist](https://img.shields.io/packagist/l/nizerin/yun-xin-helper.svg)
+![PHP from Packagist](https://img.shields.io/packagist/php-v/nizerin/yun-xin-helper.svg) ![](https://img.shields.io/packagist/dt/nizerin/yun-xin-helper.svg) ![](https://img.shields.io/packagist/v/nizerin/yun-xin-helper.svg) ![Packagist](https://img.shields.io/packagist/l/nizerin/yun-xin-helper.svg)
 
 # 安装
 
