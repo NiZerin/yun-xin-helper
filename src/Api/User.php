@@ -44,7 +44,7 @@ class User extends Base
      * 验证参数
      * @param $accid
      * @param $name
-     * @param array $props
+     * @param  array  $props
      * @param $icon
      * @param $token
      * @param $sign
@@ -75,34 +75,34 @@ class User extends Base
             throw new LogicException('accid 不合法！');
         }
         if (strlen($name) > self::USER_NAME_LIMIT) {
-            throw new YunXinArgException('用户昵称最大长度' . self::USER_NAME_LIMIT . '字符！');
+            throw new YunXinArgException('用户昵称最大长度'.self::USER_NAME_LIMIT.'字符！');
         }
         if (strlen($propsStr) > self::USER_PROPS_LIMIT) {
-            throw new YunXinArgException('用户props最大长度' . self::USER_PROPS_LIMIT . '字符！');
+            throw new YunXinArgException('用户props最大长度'.self::USER_PROPS_LIMIT.'字符！');
         }
         if (strlen($icon) > self::USER_ICON_LIMIT) {
-            throw new YunXinArgException('用户头像URL最大长度' . self::USER_ICON_LIMIT . '字符！');
+            throw new YunXinArgException('用户头像URL最大长度'.self::USER_ICON_LIMIT.'字符！');
         }
         if (strlen($token) > self::USER_TOKEN_LIMIT) {
-            throw new YunXinArgException('用户token最大长度' . self::USER_TOKEN_LIMIT . '字符！');
+            throw new YunXinArgException('用户token最大长度'.self::USER_TOKEN_LIMIT.'字符！');
         }
         if (strlen($sign) > self::USER_SIGN_LIMIT) {
-            throw new YunXinArgException('用户sign最大长度' . self::USER_SIGN_LIMIT . '字符！');
+            throw new YunXinArgException('用户sign最大长度'.self::USER_SIGN_LIMIT.'字符！');
         }
         if (strlen($email) > self::USER_EMAIL_LIMIT) {
-            throw new YunXinArgException('用户邮箱最大长度' . self::USER_EMAIL_LIMIT . '字符！');
+            throw new YunXinArgException('用户邮箱最大长度'.self::USER_EMAIL_LIMIT.'字符！');
         }
         if (strlen($birth) > self::USER_BIRTH_LIMIT) {
-            throw new YunXinArgException('用户生日最大长度' . self::USER_BIRTH_LIMIT . '字符！');
+            throw new YunXinArgException('用户生日最大长度'.self::USER_BIRTH_LIMIT.'字符！');
         }
         if (strlen($mobile) > self::USER_MOBILE_LIMIT) {
-            throw new YunXinArgException('用户手机号最大长度' . self::USER_MOBILE_LIMIT . '字符！');
+            throw new YunXinArgException('用户手机号最大长度'.self::USER_MOBILE_LIMIT.'字符！');
         }
         if (!in_array($gender, self::USER_GENDER_TYPES)) {
             throw new YunXinArgException('用户性别不合法！');
         }
         if (strlen($ex) > self::USER_EX_LIMIT) {
-            throw new YunXinArgException('用户名片扩展最大长度' . self::USER_EX_LIMIT . '字符！');
+            throw new YunXinArgException('用户名片扩展最大长度'.self::USER_EX_LIMIT.'字符！');
         }
     }
 

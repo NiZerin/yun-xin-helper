@@ -134,8 +134,8 @@ class ChatRoom extends Base
 
     /**
      * 批量查询聊天室信息
-     * @param array $roomIds
-     * @param bool $needOnlineUserCount
+     * @param  array  $roomIds
+     * @param  bool  $needOnlineUserCount
      * @return mixed
      * @throws YunXinArgException
      * @throws GuzzleException
@@ -159,13 +159,13 @@ class ChatRoom extends Base
     /**
      * 更新聊天室
      * @param $roomId
-     * @param null $name
-     * @param null $announcement
-     * @param null $broadcasturl
-     * @param null $ext
-     * @param bool $needNotify
-     * @param null $notifyExt
-     * @param null $queuelevel
+     * @param  null  $name
+     * @param  null  $announcement
+     * @param  null  $broadcasturl
+     * @param  null  $ext
+     * @param  bool  $needNotify
+     * @param  null  $notifyExt
+     * @param  null  $queuelevel
      * @return mixed
      * @throws YunXinArgException
      * @throws GuzzleException
@@ -464,7 +464,7 @@ class ChatRoom extends Base
             throw new YunXinArgException('文本消息内容不能为空！');
         }
 
-        $body = json_encode($text,256);
+        $body = json_encode($text, 256);
 
         return $this->sendMsg(
             $roomId,
@@ -521,7 +521,7 @@ class ChatRoom extends Base
             throw new YunXinArgException('提醒消息内容不能为空！');
         }
 
-        $body = json_encode($text,256);
+        $body = json_encode($text, 256);
 
         return $this->sendMsg(
             $roomId,
@@ -791,8 +791,8 @@ class ChatRoom extends Base
      * @param $operator
      * @param $target
      * @param $muteDuration
-     * @param bool $needNotify
-     * @param string $notifyExt
+     * @param  bool  $needNotify
+     * @param  string  $notifyExt
      * @return mixed
      * @throws YunXinArgException
      * @throws GuzzleException

@@ -121,9 +121,9 @@ class Base
         for ($i = 0; $i < 128; $i++) {
             $this->nonceStr .= $hexDigits[rand(0, $digitsLen - 1)];
         }
-        $this->curTime = (string)(time());    //当前时间戳，以秒为单位
+        $this->curTime = (string) (time());    //当前时间戳，以秒为单位
 
-        $joinString = $this->appSecrt . $this->nonceStr . $this->curTime;
+        $joinString = $this->appSecrt.$this->nonceStr.$this->curTime;
         $this->checkSum = sha1($joinString);
     }
 
@@ -139,8 +139,8 @@ class Base
 
     /**
      * 发送请求
-     * @param string $uri
-     * @param array $data
+     * @param  string  $uri
+     * @param  array  $data
      * @return mixed
      * @throws YunXinBusinessException
      * @throws YunXinInnerException
@@ -171,15 +171,15 @@ class Base
         $code = $response->getStatusCode();
         $body = $response->getBody();
         if ($code != 200) {
-            throw new YunXinNetworkException('NetEase Network Error: ' . $body, $code);
+            throw new YunXinNetworkException('NetEase Network Error: '.$body, $code);
         }
-        $jsonRes = json_decode((string)$body, true);
+        $jsonRes = json_decode((string) $body, true);
         if ($jsonRes && is_array($jsonRes) && $jsonRes['code'] == self::BUSINESS_SUCCESS_CODE) {
             return $jsonRes;
         } elseif ($jsonRes && is_array($jsonRes)) {
             throw new YunXinBusinessException($jsonRes['desc'], $jsonRes['code']);
         } else {
-            throw new YunXinInnerException('NetEase inner error: ' . $body);
+            throw new YunXinInnerException('NetEase inner error: '.$body);
         }
     }
 

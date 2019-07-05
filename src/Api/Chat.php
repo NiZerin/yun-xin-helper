@@ -780,7 +780,7 @@ class Chat extends Base
             throw new YunXinArgException('接受者id组不能为空！');
         }
         if (count($accidsTo) > self::CHAT_SEND_LIMIT) {
-            throw new YunXinArgException('接受者人数' . count($accidsTo) . '超过限制！');
+            throw new YunXinArgException('接受者人数'.count($accidsTo).'超过限制！');
         }
         if (strlen($body) > self::CHAT_MSG_BODY_LIMIT) {
             throw new YunXinArgException('body内容超过限制！');
