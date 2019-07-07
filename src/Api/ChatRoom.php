@@ -414,7 +414,7 @@ class ChatRoom extends Base
             'msgType' => $msgType,
             'resendFlag' => $resendFlag,
             'attach' => $attach,
-            'ext' => $ext,
+            'ext' => $extStr,
             'antispam' => $antispam,
             'antispamCustom' => $antispamCustomStr,
             'skipHistory' => $skipHistory,
