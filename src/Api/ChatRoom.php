@@ -383,7 +383,7 @@ class ChatRoom extends Base
         }
         $extStr = '';
         if ($ext) {
-            $extStr = json_encode($ext);
+            $extStr = json_encode($ext,256);
         }
         if (strlen($extStr) > self::CHAT_ROOM_EXT_LIMIT) {
             throw new YunXinArgException('消息扩展字段超过限制！');
