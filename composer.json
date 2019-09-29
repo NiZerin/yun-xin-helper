@@ -6,7 +6,9 @@
   "authors": [
     {
       "name": "nizerin",
-      "email": "nizerin98@gmail.com"
+      "email": "nizerin98@gmail.com",
+      "homepage": "https://www.iacblog.com/",
+      "role": "Developer"
     }
   ],
   "require": {
