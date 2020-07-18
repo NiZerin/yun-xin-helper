@@ -793,11 +793,11 @@ class Chat extends Base
             'body' => $body,
             'option' => $option,
             'pushcontent' => $pushContent,
-            'payload' => json_encode($payload),
+            //'payload' => json_encode($payload),
             'ext' => $ext,
             'bid' => $bid,
             'useYidun' => $useYidun,
-            'returnMsgid' => $returnMsgid,
+            //'returnMsgid' => $returnMsgid,
         ]);
         return $res;
     }
