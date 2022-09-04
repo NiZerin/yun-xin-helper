@@ -17,6 +17,7 @@ use YunXinHelper\Exception\YunXinNetworkException;
 class Base
 {
     private $baseUrl = 'https://api.netease.im/nimserver/';
+    private $baseUrlSg = 'https://api-sg.netease.im/nimserver/';
 
     const HEX_DIGITS = "0123456789abcdefghijklmn";
 
@@ -135,6 +136,16 @@ class Base
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
+    }
+
+    /**
+     * 设置 API 地址
+     * @param string $url
+     * @return void
+     */
+    public function setBaseUrl(string $url)
+    {
+        $this->baseUrl = $url;
     }
 
     /**
